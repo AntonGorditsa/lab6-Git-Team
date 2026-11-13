@@ -1,47 +1,72 @@
-
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main() {
-    const int n = 12;
-    int a[n] = {2, 5, 8, 3, 10, 12, 7, 4, 6, 9, 14, 16};
-    double b[n];
+    const int n = 14;
 
-    int count = 0;
-    int secondOdd = -1;
+    int a[n] = {
+        -4, 8, -6, 10, -2, 12, -8,
+        14, -10, 16, -12, 18, -14, 20
+    };
+
+    double b[n];
+    double sumNegative = 0;
+    double sumPositive = 0;
+    int countNegative = 0;
+    int countPositive = 0;
 
     for (int i = 0; i < n; i++) {
-        if (a[i] % 2 != 0) {
-            count++;
-            if (count == 2) {
-                secondOdd = i;
-                break;
-            }
+        if (a[i] < 0) {
+            sumNegative += a[i];
+            countNegative++;
+        }
+        if (a[i] > 0) {
+            sumPositive += a[i];
+            countPositive++;
         }
     }
+
+    double avgNegative = countNegative > 0
+        ? sumNegative / countNegative : 1.0;
+
+    double avgPositive = countPositive > 0
+        ? sumPositive / countPositive : 0.0;
 
     for (int i = 0; i < n; i++) {
         b[i] = a[i];
 
-        if (secondOdd != -1 && i >= secondOdd) {
-            b[i] = (double)a[i] / a[secondOdd];
+        // Positions start from 1
+        if ((i + 1) % 2 == 0 && a[i] < 0) {
+            b[i] = avgNegative;
+        }
+
+        if ((i + 1) % 2 != 0) {
+            b[i] = avgPositive;
         }
     }
 
-    cout << "Original array: ";
+    cout << fixed << setprecision(2);
+
+    cout << "Original array: [";
     for (int i = 0; i < n; i++) {
-        cout << a[i] << " ";
+        cout << a[i];
+        if (i < n - 1) cout << ", ";
     }
+    cout << "]\n";
 
-    cout << "\nNew array: ";
-    for (int i = 0; i < n; i++) {s
-        cout << b[i] << " ";
+    cout << "Modified array: [";
+    for (int i = 0; i < n; i++) {
+        cout << b[i];
+        if (i < n - 1) cout << ", ";
     }
+    cout << "]\n";
 
-    if (secondOdd == -1) {
-        cout << "\nLess than two odd elements!";
-    }
+    cout << "Average negative: "
+         << avgNegative << endl;
 
-    cout << endl;
+    cout << "Average positive: "
+         << avgPositive << endl;
+
     return 0;
 }
