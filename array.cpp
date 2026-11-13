@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
     const int n = 12;
-    int a[n] = {2, 5, 8, 3, 10, 12, 7, 4, 6, 9, 14, 16};
+    int a[n] = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 7 };
     double b[n];
 
     int count = 0;
