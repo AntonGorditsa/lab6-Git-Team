@@ -1,11 +1,26 @@
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
-    const int n = 12;
-    int a[n] = {2, 5, 8, 3, 10, 12, 7, 4, 6, 9, 14, 16};
-    double b[n];
+    int n;
+
+    cout << "Enter array size: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Invalid array size!" << endl;
+        return 1;
+    }
+
+    vector<int> a(n);
+    vector<double> b(n);
+
+    cout << "Enter array elements:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
 
     int count = 0;
     int secondOdd = -1;
@@ -34,7 +49,7 @@ int main() {
     }
 
     cout << "\nNew array: ";
-    for (int i = 0; i < n; i++) {s
+    for (int i = 0; i < n; i++) {
         cout << b[i] << " ";
     }
 
